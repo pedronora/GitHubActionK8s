@@ -41,6 +41,6 @@ jobs:
 
       - name: Deploy
         run: |
-          gCloud container clusters get-credentials k8s --zone us-central1
+          run: gcloud container clusters get-credentials k8s --zone us-central1
           kubectl apply -f kubernetes/deployment.yml
 # Teste4
