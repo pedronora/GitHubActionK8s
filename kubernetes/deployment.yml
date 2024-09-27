@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meu-microservico
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: meu-microservico
+  template:
+    metadata:
+      labels:
+        app: meu-microservico
+    spec:
+      containers:
+        - name: meu-microservico
+          image: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: meu-microservico-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: meu-microservico
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
