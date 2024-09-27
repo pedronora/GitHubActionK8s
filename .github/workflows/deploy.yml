@@ -39,6 +39,9 @@ jobs:
           service_account_key: ${{ secrets.GKE_CREDENTIALS }}
           project_id: softwares-escalaveis-at
 
+      - name: Instala o gke-gcloud-auth-plugin
+        run: gcloud components install gke-gcloud-auth-plugin
+
       - name: Deploy
         run: |
           gcloud container clusters get-credentials k8s-at --zone us-central1
